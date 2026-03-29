@@ -22,8 +22,8 @@ export default function Nav() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-200 ${
-        scrolled ? "glass" : "bg-transparent"
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-200 border-b ${
+        scrolled ? "glass border-black/[.08]" : "bg-transparent border-transparent"
       }`}
     >
       <div className="mx-auto max-w-[1200px] px-5 md:px-10 lg:px-16">
