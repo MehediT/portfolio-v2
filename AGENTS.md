@@ -154,13 +154,43 @@ The short version:
 
 1. **Branch first** — `git checkout -b feat/your-feature` before touching any file.
 2. **Stage selectively** — `git add <specific files>`, never `git add .`.
-3. **Commit with co-authors** — every commit must include:
+3. **Atomic commits** — see below.
+4. **Commit with co-authors** — every commit must include:
    ```
    Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
    Co-Authored-By: MehediT <mehedi.toure@gmail.com>
    ```
-4. **Merge with `--no-ff`** — always, no exceptions.
-5. **Verify before merge** — run `npm run build` to catch errors.
+5. **Merge with `--no-ff`** — always, no exceptions.
+6. **Verify before merge** — run `npm run build` to catch errors.
+
+## Atomic Commits — MANDATORY
+
+**Every commit must represent one single logical change.** Never bundle unrelated changes into one commit.
+
+### Rules
+
+- **One concern per commit.** A new component is one commit. Integrating it into a page is another. Updating docs is another.
+- **Each user request = at least one commit.** When the user asks for a correction, a new feature, or a tweak — commit it separately before moving on.
+- **Multi-step features get multiple commits.** Break large work into sequential commits, each buildable on its own:
+  ```
+  feat(hero): add PhoneMockup component shell
+  feat(hero): add neumorphic to-do cards to PhoneMockup
+  feat(hero): integrate PhoneMockup into Hero section
+  chore(docs): update AGENTS.md with project architecture
+  ```
+- **Corrections and refinements are their own commits.** If the user asks to fix proportions, change colors, or add a detail — that's a separate commit, not amended into the previous one:
+  ```
+  fix(phone): correct chassis ratio to 9:19.5
+  style(phone): replace gold accent with theme blue
+  feat(phone): add camera lens to Dynamic Island
+  ```
+- **Stage only the files that belong to that logical change.** If a commit is about adding a component, don't also stage unrelated doc changes.
+
+### How to decide commit boundaries
+
+Ask: *"Can I describe this change in one short sentence without 'and'?"*
+- Yes → one commit
+- No → split it
 
 ## Branch Naming
 
@@ -170,14 +200,17 @@ The short version:
 | `fix/`       | Bug fix or visual correction         |
 | `chore/`     | Config, deps, tooling, CI            |
 | `refactor/`  | Restructure without behaviour change |
+| `style/`     | Visual-only changes (colors, spacing)|
 
 ## Commit Format
 
 ```
-feat(scope): short imperative summary
+type(scope): short imperative summary
 
 Optional body explaining *why*, not what.
 
 Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
 Co-Authored-By: MehediT <mehedi.toure@gmail.com>
 ```
+
+Types: `feat`, `fix`, `chore`, `refactor`, `style`, `docs`
