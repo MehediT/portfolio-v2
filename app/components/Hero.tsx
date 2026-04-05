@@ -1,4 +1,4 @@
-import PhoneMockup from "./PhoneMockup";
+import IPhone3D from "./IPhone3D";
 
 export default function Hero() {
   return (
@@ -89,12 +89,13 @@ export default function Hero() {
             Reserved for a Three.js / R3F scene.
             Mount your canvas inside this div (#hero-3d-mount).
           */}
-          {/* ── Right: Phone mockup ── */}
+          {/* ── Right: 3D iPhone ── */}
           <div
+            id="hero-3d-mount"
             className="relative flex items-center justify-center min-h-[360px] lg:min-h-[560px]"
             aria-hidden="true"
           >
-            <PhoneMockup />
+            <IPhone3D />
           </div>
 
         </div>
