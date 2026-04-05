@@ -10,9 +10,13 @@ function PhoneModel() {
   const groupRef = useRef<THREE.Group>(null);
   const baseY = useRef(0);
 
-  // Auto-fit the model to a target height of ~2 units, centered at origin
+  // Auto-fit: correct orientation first, then scale/center to fill the view
   useEffect(() => {
     if (!groupRef.current) return;
+
+    // Rotate the scene so the phone face points toward the camera (+Z)
+    scene.rotation.set(0, Math.PI / 2, 0);
+
     const box = new THREE.Box3().setFromObject(groupRef.current);
     const center = new THREE.Vector3();
     const size = new THREE.Vector3();
@@ -20,11 +24,10 @@ function PhoneModel() {
     box.getSize(size);
 
     const maxDim = Math.max(size.x, size.y, size.z);
-    const targetSize = 2.2;
+    const targetSize = 3.5;
     const scaleFactor = targetSize / maxDim;
 
     groupRef.current.scale.setScalar(scaleFactor);
-    // Re-center after scale
     const cy = -center.y * scaleFactor;
     groupRef.current.position.set(-center.x * scaleFactor, cy, -center.z * scaleFactor);
     baseY.current = cy;
@@ -49,12 +52,11 @@ function PhoneModel() {
 export default function IPhone3D() {
   return (
     <div
-      className="w-full h-full"
-      style={{ minHeight: "480px" }}
+      className="absolute inset-0"
       aria-hidden="true"
     >
       <Canvas
-        camera={{ position: [0, 0, 4], fov: 35 }}
+        camera={{ position: [0, 0, 5], fov: 45 }}
         style={{ width: "100%", height: "100%" }}
       >
         <Suspense fallback={null}>

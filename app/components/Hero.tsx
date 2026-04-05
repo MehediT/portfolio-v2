@@ -92,7 +92,7 @@ export default function Hero() {
           {/* ── Right: 3D iPhone ── */}
           <div
             id="hero-3d-mount"
-            className="relative flex items-center justify-center min-h-[360px] lg:min-h-[560px]"
+            className="relative self-stretch"
             aria-hidden="true"
           >
             <IPhone3D />
