@@ -81,19 +81,31 @@ export default function IPhone3D() {
       tracking.current.mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
     };
 
-    // Switch to floating when the hero section is less than 40% visible
+    // Cursor enters/leaves the hero section
+    const onMouseEnter = () => { tracking.current.inHero = true; };
+    const onMouseLeave = () => { tracking.current.inHero = false; };
+
+    // Also switch to floating when scrolled past the hero (< 40% visible)
     const observer = new IntersectionObserver(
       ([entry]) => {
-        tracking.current.inHero = entry.isIntersecting;
+        if (!entry.isIntersecting) tracking.current.inHero = false;
       },
       { threshold: 0.4 }
     );
 
-    if (heroSection instanceof Element) observer.observe(heroSection);
+    if (heroSection instanceof Element) {
+      observer.observe(heroSection);
+      heroSection.addEventListener("mouseenter", onMouseEnter);
+      heroSection.addEventListener("mouseleave", onMouseLeave);
+    }
 
     window.addEventListener("mousemove", onMouseMove);
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
+      if (heroSection instanceof Element) {
+        heroSection.removeEventListener("mouseenter", onMouseEnter);
+        heroSection.removeEventListener("mouseleave", onMouseLeave);
+      }
       observer.disconnect();
     };
   }, []);
