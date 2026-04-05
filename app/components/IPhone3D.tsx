@@ -44,7 +44,7 @@ function PhoneModel({ tracking }: { tracking: React.MutableRefObject<Tracking> }
     if (inHero) {
       // Phone points toward cursor
       const targetY = mouseX * 0.55;
-      const targetX = -mouseY * 0.25;
+      const targetX = mouseY * 0.25;
       groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetY, 0.06);
       groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetX, 0.06);
       groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, baseY.current, 0.06);
