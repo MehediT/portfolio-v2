@@ -1,53 +1,18 @@
+"use client";
+
+import dynamic from "next/dynamic";
+
+const HeroCard3D = dynamic(() => import("./HeroCard3D"), { ssr: false });
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex overflow-hidden">
 
-      {/* ── Left: Tilted card panel ── */}
-      <div className="relative w-1/2 bg-background flex items-center justify-center"
-           style={{ perspective: "1200px" }}
-      >
+      {/* ── Left: 3D Card panel ── */}
+      <div className="relative w-1/2 bg-background flex items-center justify-center">
         <div className="absolute inset-0 bg-grid pointer-events-none" />
-
-        {/* Tilted blue card */}
-        <div
-          className="relative w-[420px] aspect-[16/10] rounded-[28px] animate-fade-up"
-          style={{
-            animationDelay: "400ms",
-            transform: "rotateY(-12deg) rotateX(6deg)",
-            transformStyle: "preserve-3d",
-          }}
-        >
-          {/* Card shadow */}
-          <div className="absolute inset-0 rounded-[28px]"
-               style={{ boxShadow: "30px 40px 80px rgba(0,0,0,0.18), 10px 15px 30px rgba(0,0,0,0.10)" }}
-          />
-
-          {/* Card body */}
-          <div className="relative w-full h-full rounded-[28px] bg-gradient-to-br from-[#0071E3] via-[#0A84FF] to-[#5AC8FA] overflow-hidden">
-            {/* Subtle light reflection */}
-            <div className="absolute inset-0 rounded-[28px] bg-gradient-to-br from-white/20 via-transparent to-transparent pointer-events-none" />
-
-            {/* Soft glow spots */}
-            <div className="absolute w-48 h-48 rounded-full bg-white/10 -top-12 -right-12 blur-2xl" />
-            <div className="absolute w-36 h-36 rounded-full bg-white/[0.06] bottom-8 left-8 blur-xl" />
-
-            {/* Card content */}
-            <div className="relative z-10 flex flex-col justify-between h-full p-8">
-              <div>
-                <p className="text-white/60 text-xs font-medium tracking-widest uppercase">Portfolio</p>
-                <h3 className="text-white font-display font-bold text-2xl mt-2 tracking-tight">Mehedi Touré</h3>
-                <p className="text-white/50 text-sm mt-1">Fullstack & Android Developer</p>
-              </div>
-              <div className="flex items-end justify-between">
-                <div className="flex gap-3">
-                  <span className="px-3 py-1 rounded-full bg-white/10 text-white/70 text-xs">Next.js</span>
-                  <span className="px-3 py-1 rounded-full bg-white/10 text-white/70 text-xs">Kotlin</span>
-                  <span className="px-3 py-1 rounded-full bg-white/10 text-white/70 text-xs">Supabase</span>
-                </div>
-                <span className="text-white/30 font-display text-4xl font-bold">MT</span>
-              </div>
-            </div>
-          </div>
+        <div className="relative z-10 w-full h-[60%]">
+          <HeroCard3D />
         </div>
       </div>
 
