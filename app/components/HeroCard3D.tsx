@@ -1,8 +1,9 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
+import { Text } from "@react-three/drei";
 import * as THREE from "three";
-import { useRef, useMemo } from "react";
+import { useMemo } from "react";
 
 const gradientVertexShader = `
   varying vec2 vUv;
@@ -50,8 +51,6 @@ function createRoundedRectShape(w: number, h: number, r: number) {
 }
 
 function Card() {
-  const meshRef = useRef<THREE.Mesh>(null);
-
   const geometry = useMemo(() => {
     const shape = createRoundedRectShape(3.2, 2, 0.2);
     return new THREE.ExtrudeGeometry(shape, {
@@ -70,19 +69,21 @@ function Card() {
     [],
   );
 
-  useFrame((_, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += delta * 0.15;
-    }
-  });
-
   return (
-    <mesh
-      ref={meshRef}
-      geometry={geometry}
-      material={material}
-      rotation={[0.1, -0.3, 0]}
-    />
+    <group rotation={[0.1, -0.3, 0]}>
+      <mesh geometry={geometry} material={material} />
+      <Text
+        position={[0, 0, 0.025]}
+        fontSize={0.28}
+        color="#ffffff"
+        anchorX="center"
+        anchorY="middle"
+        fontWeight={700}
+        letterSpacing={0.02}
+      >
+        Mehedi Touré
+      </Text>
+    </group>
   );
 }
 
