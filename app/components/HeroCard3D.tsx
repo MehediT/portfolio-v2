@@ -1,36 +1,8 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
-import { Text } from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { useMemo } from "react";
-
-const gradientVertexShader = `
-  varying vec2 vUv;
-  void main() {
-    vUv = uv;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-  }
-`;
-
-const gradientFragmentShader = `
-  varying vec2 vUv;
-
-  void main() {
-    vec3 topColor = vec3(0.039, 0.518, 0.969);    // #0A84FF
-    vec3 bottomColor = vec3(0.0, 0.443, 0.89);     // #0071E3
-    vec3 accentColor = vec3(0.353, 0.784, 0.98);   // #5AC8FA
-
-    vec3 color = mix(bottomColor, topColor, vUv.y);
-    color = mix(color, accentColor, smoothstep(0.3, 1.0, vUv.x) * 0.3);
-
-    // Subtle light reflection at top-left
-    float highlight = smoothstep(0.6, 1.0, vUv.y) * smoothstep(0.6, 0.0, vUv.x);
-    color += vec3(1.0) * highlight * 0.12;
-
-    gl_FragColor = vec4(color, 1.0);
-  }
-`;
+import { useMemo, useRef } from "react";
 
 function createRoundedRectShape(w: number, h: number, r: number) {
   const shape = new THREE.Shape();
@@ -51,8 +23,10 @@ function createRoundedRectShape(w: number, h: number, r: number) {
 }
 
 function Card() {
+  const meshRef = useRef<THREE.Mesh>(null);
+
   const geometry = useMemo(() => {
-    const shape = createRoundedRectShape(3.2, 2, 0.2);
+    const shape = createRoundedRectShape(3.2 * 0.7, 2 * 0.7, 0.2 * 0.7);
     return new THREE.ExtrudeGeometry(shape, {
       depth: 0.02,
       bevelEnabled: false,
@@ -61,29 +35,29 @@ function Card() {
 
   const material = useMemo(
     () =>
-      new THREE.ShaderMaterial({
-        vertexShader: gradientVertexShader,
-        fragmentShader: gradientFragmentShader,
+      new THREE.MeshStandardMaterial({
+        color: 0x0071e3,
         side: THREE.DoubleSide,
       }),
     [],
   );
 
+  useFrame(({ clock }) => {
+    if (!meshRef.current) return;
+    const t = clock.getElapsedTime();
+
+    meshRef.current.position.x = Math.sin(t * 0.6) * 0.08;
+    meshRef.current.position.y = Math.sin(t * 0.8) * 0.06;
+    meshRef.current.rotation.x = Math.sin(t * 0.5) * 0.03;
+    meshRef.current.rotation.y = Math.cos(t * 0.4) * 0.04;
+  });
+
   return (
-    <group rotation={[0.1, -0.3, 0]}>
-      <mesh geometry={geometry} material={material} />
-      <Text
-        position={[0, 0, 0.025]}
-        fontSize={0.28}
-        color="#ffffff"
-        anchorX="center"
-        anchorY="middle"
-        fontWeight={700}
-        letterSpacing={0.02}
-      >
-        Mehedi Touré
-      </Text>
-    </group>
+    <mesh
+      ref={meshRef}
+      geometry={geometry}
+      material={material}
+    />
   );
 }
 
