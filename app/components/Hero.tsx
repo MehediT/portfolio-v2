@@ -1,3 +1,5 @@
+import IPhone3D from "./IPhone3D";
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen bg-background overflow-hidden flex items-center">
@@ -87,17 +89,13 @@ export default function Hero() {
             Reserved for a Three.js / R3F scene.
             Mount your canvas inside this div (#hero-3d-mount).
           */}
+          {/* ── Right: 3D iPhone ── */}
           <div
             id="hero-3d-mount"
-            className="relative flex items-center justify-center min-h-[360px] lg:min-h-[560px]"
+            className="relative self-stretch"
             aria-hidden="true"
           >
-            {/* Placeholder glow — remove when 3D is added */}
-            <div className="absolute w-72 h-72 lg:w-96 lg:h-96 rounded-full bg-accent/[0.10] blur-3xl" />
-            <div className="absolute w-48 h-48 lg:w-64 lg:h-64 rounded-full bg-accent/[0.07] blur-2xl" />
-            {/* Decorative rings */}
-            <div className="absolute w-64 h-64 lg:w-80 lg:h-80 rounded-full border border-foreground/[0.04]" />
-            <div className="absolute w-48 h-48 lg:w-56 lg:h-56 rounded-full border border-foreground/[0.06]" />
+            <IPhone3D />
           </div>
 
         </div>
