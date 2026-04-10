@@ -28,17 +28,14 @@ function Card() {
   const geometry = useMemo(() => {
     const shape = createRoundedRectShape(3.2 * 0.7, 2 * 0.7, 0.2 * 0.7);
     return new THREE.ExtrudeGeometry(shape, {
-      depth: 0.02,
+      depth: 0.2,
       bevelEnabled: false,
     });
   }, []);
 
   const material = useMemo(
     () =>
-      new THREE.MeshStandardMaterial({
-        color: 0x0071e3,
-        side: THREE.DoubleSide,
-      }),
+      new THREE.MeshBasicMaterial({ color: 0x0071e3 }),
     [],
   );
 
@@ -68,8 +65,6 @@ export default function HeroCard3D() {
       gl={{ antialias: true, alpha: true }}
       style={{ width: "100%", height: "100%" }}
     >
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 5, 5]} intensity={0.8} />
       <Card />
     </Canvas>
   );
