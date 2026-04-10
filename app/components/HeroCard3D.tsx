@@ -1,10 +1,8 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
-import { RoundedBox } from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useRef, useMemo } from "react";
 
 const gradientVertexShader = `
   varying vec2 vUv;
@@ -33,14 +31,44 @@ const gradientFragmentShader = `
   }
 `;
 
+function createRoundedRectShape(w: number, h: number, r: number) {
+  const shape = new THREE.Shape();
+  const x = -w / 2;
+  const y = -h / 2;
+
+  shape.moveTo(x + r, y);
+  shape.lineTo(x + w - r, y);
+  shape.quadraticCurveTo(x + w, y, x + w, y + r);
+  shape.lineTo(x + w, y + h - r);
+  shape.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  shape.lineTo(x + r, y + h);
+  shape.quadraticCurveTo(x, y + h, x, y + h - r);
+  shape.lineTo(x, y + r);
+  shape.quadraticCurveTo(x, y, x + r, y);
+
+  return shape;
+}
+
 function Card() {
   const meshRef = useRef<THREE.Mesh>(null);
 
-  const shaderMaterial = new THREE.ShaderMaterial({
-    vertexShader: gradientVertexShader,
-    fragmentShader: gradientFragmentShader,
-    side: THREE.DoubleSide,
-  });
+  const geometry = useMemo(() => {
+    const shape = createRoundedRectShape(3.2, 2, 0.2);
+    return new THREE.ExtrudeGeometry(shape, {
+      depth: 0.02,
+      bevelEnabled: false,
+    });
+  }, []);
+
+  const material = useMemo(
+    () =>
+      new THREE.ShaderMaterial({
+        vertexShader: gradientVertexShader,
+        fragmentShader: gradientFragmentShader,
+        side: THREE.DoubleSide,
+      }),
+    [],
+  );
 
   useFrame((_, delta) => {
     if (meshRef.current) {
@@ -49,15 +77,12 @@ function Card() {
   });
 
   return (
-    <RoundedBox
+    <mesh
       ref={meshRef}
-      args={[3.2, 2, 0.04]}
-      radius={0.03}
-      smoothness={4}
+      geometry={geometry}
+      material={material}
       rotation={[0.1, -0.3, 0]}
-    >
-      <primitive object={shaderMaterial} attach="material" />
-    </RoundedBox>
+    />
   );
 }
 
