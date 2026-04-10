@@ -2,17 +2,14 @@ import IPhone3D from "./IPhone3D";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen bg-background overflow-hidden flex items-center">
-      {/* Subtle grid */}
-      <div className="absolute inset-0 bg-grid pointer-events-none" />
+    <section className="relative min-h-screen flex overflow-hidden">
 
-      {/* Soft blue radial wash — right side, where 3D will live */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_70%_at_72%_50%,rgba(0,113,227,0.06),transparent)] pointer-events-none" />
+      {/* ── Left: White panel ── */}
+      <div className="relative w-1/2 bg-background flex items-center justify-center">
+        {/* Subtle grid */}
+        <div className="absolute inset-0 bg-grid pointer-events-none" />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1200px] px-5 md:px-10 lg:px-16">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-8 items-center min-h-screen py-32">
-
-          {/* ── Left: Text content ── */}
+        <div className="relative z-10 px-10 lg:px-16 max-w-xl w-full">
           <div className="flex flex-col gap-7">
             {/* Availability badge */}
             <div className="animate-fade-up" style={{ animationDelay: "100ms" }}>
@@ -22,24 +19,16 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* Name */}
-            <div className="animate-fade-up" style={{ animationDelay: "220ms" }}>
-              <h1 className="font-display font-bold text-foreground leading-none tracking-[-0.03em] text-[clamp(3rem,8vw,7rem)]">
-                Mehedi<br />Touré
-              </h1>
-            </div>
-
             {/* Role */}
-            <div className="animate-fade-up" style={{ animationDelay: "370ms" }}>
+            <div className="animate-fade-up" style={{ animationDelay: "220ms" }}>
               <p className="text-lg md:text-xl text-muted font-medium">
                 Fullstack &amp; Android Developer
               </p>
             </div>
 
             {/* Bio excerpt */}
-            <div className="animate-fade-up" style={{ animationDelay: "500ms" }}>
+            <div className="animate-fade-up" style={{ animationDelay: "370ms" }}>
               <p className="text-[15px] text-muted leading-relaxed max-w-md">
-                Building scalable web applications and native Android experiences.
                 Next.js, Supabase, Kotlin and Jetpack Compose. Currently at{" "}
                 <span className="text-foreground font-medium">Weblib</span>, Paris.
               </p>
@@ -48,7 +37,7 @@ export default function Hero() {
             {/* CTAs */}
             <div
               className="animate-fade-up flex flex-wrap gap-3 pt-1"
-              style={{ animationDelay: "620ms" }}
+              style={{ animationDelay: "500ms" }}
             >
               <a
                 href="#work"
@@ -67,7 +56,7 @@ export default function Hero() {
             {/* Quick stats */}
             <div
               className="animate-fade-up flex gap-8 pt-4 border-t border-border"
-              style={{ animationDelay: "740ms" }}
+              style={{ animationDelay: "620ms" }}
             >
               <div>
                 <p className="text-2xl font-display font-bold text-foreground">2+</p>
@@ -83,21 +72,35 @@ export default function Hero() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* ── Right: 3D mount ── */}
-          {/*
-            Reserved for a Three.js / R3F scene.
-            Mount your canvas inside this div (#hero-3d-mount).
-          */}
-          {/* ── Right: 3D iPhone ── */}
-          <div
-            id="hero-3d-mount"
-            className="relative self-stretch"
-            aria-hidden="true"
-          >
-            <IPhone3D />
+      {/* ── Right: Blue panel ── */}
+      <div className="relative w-1/2 bg-[#0071E3] flex items-center justify-center overflow-hidden">
+        {/* Animated floating circles */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute w-72 h-72 rounded-full bg-white/10 -top-16 -left-16 animate-hero-float" />
+          <div className="absolute w-96 h-96 rounded-full bg-white/5 bottom-[-4rem] right-[-4rem] animate-hero-float-reverse" />
+          <div className="absolute w-48 h-48 rounded-full bg-white/[0.07] top-1/2 left-1/3 -translate-y-1/2 animate-hero-float-slow" />
+        </div>
+
+        {/* Content inside right panel */}
+        <div className="relative z-10 px-12 text-white">
+          <div className="animate-fade-up" style={{ animationDelay: "300ms" }}>
+            <p className="text-lg font-medium tracking-wide uppercase opacity-80">
+              Portfolio
+            </p>
           </div>
-
+          <div className="animate-fade-up mt-4" style={{ animationDelay: "500ms" }}>
+            <h2 className="font-display font-bold text-5xl xl:text-6xl leading-tight tracking-tight">
+              Mehedi<br />Touré
+            </h2>
+          </div>
+          <div className="animate-fade-up mt-6" style={{ animationDelay: "700ms" }}>
+            <p className="text-white/70 text-base max-w-xs leading-relaxed">
+              Fullstack &amp; Android Developer — building scalable web applications and native experiences.
+            </p>
+          </div>
         </div>
       </div>
 
