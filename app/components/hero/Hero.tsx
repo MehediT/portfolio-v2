@@ -15,10 +15,10 @@ function LeftPanel() {
           className="animate-fade-up flex flex-col items-center gap-3"
           style={{ animationDelay: "100ms" }}
         >
-          <h1 className="font-display font-bold text-foreground/85 leading-none tracking-[-0.04em] text-[clamp(3rem,12vw,8.5rem)]">
+          <h1 className="font-display font-bold text-foreground/85 leading-none tracking-[-0.04em] text-[clamp(3rem,12vw,8.5rem)] text-center">
             Mehedi<br />Touré
           </h1>
-          <p className="text-base md:text-lg text-foreground/80 font-medium px-4 md:px-5 py-2 bg-white/30 backdrop-blur-sm rounded-full border border-border">
+          <p className="text-base md:text-lg text-foreground/80 font-medium px-4 md:px-5 py-2 bg-white/30 backdrop-blur-sm rounded-full border border-border text-center">
             Fullstack &amp; Android Developer
           </p>
         </div>
