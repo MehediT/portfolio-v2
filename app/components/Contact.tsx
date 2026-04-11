@@ -72,7 +72,7 @@ export default function Contact() {
 
           {/* Social links */}
           <ScrollReveal delay={360}>
-            <div className="flex items-center justify-center gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-3">
               {SOCIAL.map(({ label, href, icon }) => (
                 <a
                   key={label}
