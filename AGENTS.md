@@ -210,7 +210,7 @@ type(scope): short imperative summary
 Optional body explaining *why*, not what.
 
 Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
-Co-Authored-By: MehediT <mehedi.toure@gmail.com>
+Authored-By: MehediT <mehedi.toure@gmail.com>
 ```
 
 Types: `feat`, `fix`, `chore`, `refactor`, `style`, `docs`

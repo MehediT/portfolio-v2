@@ -43,6 +43,9 @@
   --animate-fade-up: fade-up 500ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
   --animate-fade-in: fade-in 300ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
   --animate-dot-pulse: dot-pulse 2s ease-in-out infinite;
+  --animate-hero-float: hero-float 6s ease-in-out infinite;
+  --animate-hero-float-reverse: hero-float-reverse 8s ease-in-out infinite;
+  --animate-hero-float-slow: hero-float-slow 10s ease-in-out infinite;
 }
 
 /* ─────────────────────────────────────────
@@ -61,6 +64,22 @@
 @keyframes dot-pulse {
   0%, 100% { opacity: 1;   transform: scale(1); }
   50%       { opacity: 0.4; transform: scale(0.8); }
+}
+
+@keyframes hero-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(20px, -30px) scale(1.05); }
+}
+
+@keyframes hero-float-reverse {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-25px, 20px) scale(1.08); }
+}
+
+@keyframes hero-float-slow {
+  0%, 100% { transform: translate(0, -50%) scale(1); }
+  33%      { transform: translate(15px, calc(-50% + 25px)) scale(1.03); }
+  66%      { transform: translate(-10px, calc(-50% - 15px)) scale(0.97); }
 }
 
 /* ─────────────────────────────────────────
