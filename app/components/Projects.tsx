@@ -12,6 +12,20 @@ interface Project {
   accent: string;
 }
 
+/* ── Couleurs par techno : bg subtil + texte coloré ── */
+const TECH_COLORS: Record<string, string> = {
+  "Kotlin":          "bg-[#E97627]/12 text-[#E97627]",
+  "Jetpack Compose": "bg-[#4ECDC4]/12 text-[#4ECDC4]",
+  "Next.js":         "bg-[#0D9488]/12 text-[#0D9488]",
+  "TypeScript":      "bg-[#3178C6]/12 text-[#3178C6]",
+  "Tailwind CSS":    "bg-[#38BDF8]/12 text-[#38BDF8]",
+  "Supabase":        "bg-[#3ECF8E]/12 text-[#3ECF8E]",
+  "Three.js":        "bg-[#A78BFA]/12 text-[#A78BFA]",
+  "Python":          "bg-[#FFD43B]/12 text-[#B8960C]",
+  "Room":            "bg-[#6366F1]/12 text-[#818CF8]",
+  "AI":              "bg-[#F472B6]/12 text-[#F472B6]",
+};
+
 const PROJECTS: Project[] = [
   {
     title: "TabInStore",
@@ -19,7 +33,7 @@ const PROJECTS: Project[] = [
     context: "Weblib · Professional",
     description:
       "Large-scale enterprise Android application used by major retail clients to manage and control connected tablets across hundreds of stores. Focus on optimization, clean architecture, and UX.",
-    tech: ["Kotlin", "Jetpack Compose", "Room", "Hilt", "Retrofit"],
+    tech: ["Kotlin", "Jetpack Compose"],
     accent: "bg-orange-500/10 text-orange-600",
   },
   {
@@ -28,7 +42,7 @@ const PROJECTS: Project[] = [
     context: "Personal · Ongoing",
     description:
       "Android app allowing users to rate and analyze their dating experiences through AI-powered sentiment analysis and personalized insights. Built with modern Kotlin stack.",
-    tech: ["Kotlin", "Jetpack Compose", "Room", "Hilt", "Retrofit"],
+    tech: ["Kotlin", "Jetpack Compose", "Room", "AI"],
     github: "https://github.com/mehedit/RateMyDate",
     accent: "bg-pink-500/10 text-pink-600",
   },
@@ -38,7 +52,7 @@ const PROJECTS: Project[] = [
     context: "Personal · Ongoing",
     description:
       "B2B prospecting automation platform — data scraping, AI-driven message generation, and integrated CRM export. Built for agencies and sales teams.",
-    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "Python"],
+    tech: ["Next.js", "TypeScript", "Supabase", "Python"],
     accent: "bg-violet-500/10 text-violet-600",
   },
   {
@@ -47,7 +61,7 @@ const PROJECTS: Project[] = [
     context: "Personal · This site",
     description:
       "Full-stack portfolio with dynamic content, Apple-inspired design system, and 3D elements. Built with Next.js, TypeScript, and Supabase for data management.",
-    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
+    tech: ["Next.js", "TypeScript", "Three.js", "Tailwind CSS"],
     github: "https://github.com/mehedit/portfolio-mehedi",
     demo: "https://mehedi-toure.com",
     accent: "bg-blue-500/10 text-blue-600",
@@ -142,7 +156,9 @@ export default function Projects() {
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="px-2.5 py-1 bg-background-secondary text-[12px] text-muted rounded-[var(--radius-badge)] font-medium"
+                      className={`px-2.5 py-1 text-[12px] font-medium rounded-[var(--radius-badge)] ${
+                        TECH_COLORS[t] ?? "bg-background-secondary text-muted"
+                      }`}
                     >
                       {t}
                     </span>
