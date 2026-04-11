@@ -11,11 +11,11 @@ function LeftPanel() {
         <HeroScene3D />
       </div>
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-8">
-        <div className="animate-fade-up" style={{ animationDelay: "100ms" }}>
+        <div className="animate-fade-up flex flex-col items-center gap-3" style={{ animationDelay: "100ms" }}>
           <h1 className="font-display font-bold text-foreground leading-none tracking-[-0.04em] text-[clamp(4.5rem,8vw,8.5rem)]">
             Mehedi<br />Touré
           </h1>
-          <p className="text-lg text-muted font-medium mt-3">
+          <p className="text-lg text-foreground/80 font-medium px-5 py-2 bg-white/30 backdrop-blur-sm rounded-full border border-border">
             Fullstack &amp; Android Developer
           </p>
         </div>
