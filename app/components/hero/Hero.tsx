@@ -11,8 +11,11 @@ function LeftPanel() {
         <HeroScene3D />
       </div>
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-8">
-        <div className="animate-fade-up flex flex-col items-center gap-3" style={{ animationDelay: "100ms" }}>
-          <h1 className="font-display font-bold text-foreground leading-none tracking-[-0.04em] text-[clamp(4.5rem,8vw,8.5rem)]">
+        <div
+          className="animate-fade-up flex flex-col items-center gap-3"
+          style={{ animationDelay: "100ms" }}
+        >
+          <h1 className="font-display font-bold text-foreground/85 leading-none tracking-[-0.04em] text-[clamp(4.5rem,8vw,8.5rem)]">
             Mehedi<br />Touré
           </h1>
           <p className="text-lg text-foreground/80 font-medium px-5 py-2 bg-white/30 backdrop-blur-sm rounded-full border border-border">
@@ -183,27 +186,11 @@ function RightPanel() {
   );
 }
 
-function ScrollCue() {
-  return (
-    <div
-      className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-in"
-      style={{ animationDelay: "1200ms" }}
-      aria-hidden="true"
-    >
-      <span className="text-[11px] text-muted tracking-widest uppercase">Scroll</span>
-      <svg width="16" height="20" viewBox="0 0 16 20" fill="none" className="text-muted animate-bounce">
-        <path d="M8 1v14M3 11l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    </div>
-  );
-}
-
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex overflow-hidden">
       <LeftPanel />
       <RightPanel />
-      <ScrollCue />
     </section>
   );
 }
