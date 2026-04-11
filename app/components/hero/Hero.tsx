@@ -2,14 +2,23 @@
 
 import dynamic from "next/dynamic";
 
-const HeroCard3D = dynamic(() => import("./HeroCard3D"), { ssr: false });
+const HeroScene3D = dynamic(() => import("./HeroScene3D"), { ssr: false });
 
 function LeftPanel() {
   return (
-    <div className="relative w-1/2 bg-background flex items-center justify-center">
-      <div className="absolute inset-0 bg-grid pointer-events-none" />
-      <div className="relative z-10 w-full h-[60%]">
-        <HeroCard3D />
+    <div className="relative w-1/2 bg-white bg-grid overflow-hidden">
+      <div className="absolute inset-0">
+        <HeroScene3D />
+      </div>
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-8">
+        <div className="animate-fade-up" style={{ animationDelay: "100ms" }}>
+          <h1 className="font-display font-bold text-foreground leading-none tracking-[-0.04em] text-[clamp(4.5rem,8vw,8.5rem)]">
+            Mehedi<br />Touré
+          </h1>
+          <p className="text-lg text-muted font-medium mt-3">
+            Fullstack &amp; Android Developer
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -104,6 +113,29 @@ function QuickStats() {
   );
 }
 
+function SkillBlocks() {
+  const skills = [
+    { title: "Android Development",   sub: "Kotlin · Jetpack Compose",  icon: "📱" },
+    { title: "Fullstack Development",  sub: "Next.js · React · Supabase", icon: "🌐" },
+    { title: "Information Systems",    sub: "Architecture · Management",  icon: "🏗️" },
+  ];
+  return (
+    <div className="flex flex-col gap-3">
+      {skills.map(({ title, sub, icon }) => (
+        <div key={title} className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center text-xl shrink-0">
+            {icon}
+          </div>
+          <div>
+            <p className="text-white text-[14px] font-semibold leading-tight">{title}</p>
+            <p className="text-white/55 text-[12px] mt-0.5">{sub}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function RightPanel() {
   return (
     <div className="relative w-1/2 bg-[#0071E3] flex items-center justify-center overflow-hidden">
@@ -111,7 +143,7 @@ function RightPanel() {
       <div className="relative z-10 px-10 lg:px-16 max-w-xl w-full">
         <div className="flex flex-col gap-7">
           <AvailabilityBadge />
-          <HeroHeading />
+          <SkillBlocks />
           <HeroCTAs />
           <QuickStats />
         </div>
