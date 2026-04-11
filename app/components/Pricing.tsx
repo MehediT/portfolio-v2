@@ -78,11 +78,11 @@ export default function Pricing() {
         </div>
 
         {/* Pricing cards */}
-        <div className="grid md:grid-cols-3 gap-5 items-stretch">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 items-stretch">
           {PLANS.map((plan, i) => (
             <ScrollReveal key={plan.name} delay={i * 100} className="h-full">
               <div
-                className={`relative rounded-[var(--radius-card-lg)] p-8 h-full flex flex-col transition-all duration-300 ${
+                className={`relative rounded-[var(--radius-card-lg)] p-6 md:p-8 h-full flex flex-col transition-all duration-300 ${
                   plan.featured
                     ? "bg-accent text-white shadow-[var(--shadow-xl)]"
                     : "bg-white shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1"

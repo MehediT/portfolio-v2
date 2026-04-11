@@ -103,7 +103,7 @@ export default function Projects() {
         <div className="grid sm:grid-cols-2 gap-5">
           {PROJECTS.map((project, i) => (
             <ScrollReveal key={project.title} delay={i * 80}>
-              <article className="group relative bg-background rounded-[var(--radius-card)] p-7 md:p-8 border border-border/60 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
+              <article className="group relative bg-background rounded-[var(--radius-card)] p-5 md:p-8 border border-border/60 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
 
                 {/* Top row: type badge + links */}
                 <div className="flex items-center justify-between mb-5">

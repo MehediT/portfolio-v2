@@ -6,19 +6,19 @@ const HeroScene3D = dynamic(() => import("./HeroScene3D"), { ssr: false });
 
 function LeftPanel() {
   return (
-    <div className="relative w-1/2 bg-white bg-grid overflow-hidden">
+    <div className="relative w-full md:w-1/2 min-h-[58vh] md:min-h-screen bg-white bg-grid overflow-hidden">
       <div className="absolute inset-0">
         <HeroScene3D />
       </div>
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-8">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 md:px-8 py-20 md:py-0">
         <div
           className="animate-fade-up flex flex-col items-center gap-3"
           style={{ animationDelay: "100ms" }}
         >
-          <h1 className="font-display font-bold text-foreground/85 leading-none tracking-[-0.04em] text-[clamp(4.5rem,8vw,8.5rem)]">
+          <h1 className="font-display font-bold text-foreground/85 leading-none tracking-[-0.04em] text-[clamp(3rem,12vw,8.5rem)]">
             Mehedi<br />Touré
           </h1>
-          <p className="text-lg text-foreground/80 font-medium px-5 py-2 bg-white/30 backdrop-blur-sm rounded-full border border-border">
+          <p className="text-base md:text-lg text-foreground/80 font-medium px-4 md:px-5 py-2 bg-white/30 backdrop-blur-sm rounded-full border border-border">
             Fullstack &amp; Android Developer
           </p>
         </div>
@@ -97,7 +97,7 @@ function HeroCTAs() {
 function QuickStats() {
   return (
     <div
-      className="animate-fade-up flex gap-8 pt-4 border-t border-white/20"
+      className="animate-fade-up flex gap-5 md:gap-8 pt-4 border-t border-white/20"
       style={{ animationDelay: "740ms" }}
     >
       <div>
@@ -129,7 +129,7 @@ function WhoAmI() {
         Currently at <span className="text-white font-medium">Weblib</span>, Paris — exploring
         AI-powered applications and scalable digital systems.
       </p>
-      <div className="flex items-center gap-3 pt-1">
+      <div className="flex flex-wrap items-center gap-2 pt-1">
         <a
           href="https://github.com/mehedit"
           target="_blank"
@@ -172,10 +172,10 @@ function WhoAmI() {
 
 function RightPanel() {
   return (
-    <div className="relative w-1/2 bg-[#0071E3] flex items-center justify-center overflow-hidden">
+    <div className="relative w-full md:w-1/2 bg-[#0071E3] flex items-center justify-center overflow-hidden py-14 md:py-0">
       <FloatingCircles />
-      <div className="relative z-10 px-10 lg:px-16 max-w-xl w-full">
-        <div className="flex flex-col gap-7">
+      <div className="relative z-10 px-6 md:px-10 lg:px-16 max-w-xl w-full">
+        <div className="flex flex-col gap-6 md:gap-7">
           <AvailabilityBadge />
           <WhoAmI />
           <HeroCTAs />
@@ -188,7 +188,7 @@ function RightPanel() {
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex overflow-hidden">
+    <section className="relative min-h-screen flex flex-col md:flex-row overflow-hidden">
       <LeftPanel />
       <RightPanel />
     </section>
