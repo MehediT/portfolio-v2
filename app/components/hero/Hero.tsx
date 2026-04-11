@@ -10,7 +10,7 @@ function LeftPanel() {
       <div className="absolute inset-0">
         <HeroScene3D />
       </div>
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 md:px-8 py-20 md:py-0">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-[58vh] md:min-h-screen text-center px-6 md:px-8 py-20 md:py-0">
         <div
           className="animate-fade-up flex flex-col items-center gap-3"
           style={{ animationDelay: "100ms" }}
