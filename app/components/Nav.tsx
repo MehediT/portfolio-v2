@@ -112,31 +112,40 @@ function NavInner({ variant, menuOpen, setMenuOpen }: NavInnerProps) {
 }
 
 export default function Nav() {
-  const [scrolled, setScrolled]   = useState(false);
-  const [menuOpen, setMenuOpen]   = useState(false);
+  const [scrolled,   setScrolled]   = useState(false);
+  const [menuOpen,   setMenuOpen]   = useState(false);
+  const [isDesktop,  setIsDesktop]  = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    const mq = window.matchMedia("(min-width: 768px)");
+    setIsDesktop(mq.matches);
+    const onResize = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", onResize);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      mq.removeEventListener("change", onResize);
+    };
   }, []);
 
   const baseClass = "fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b";
-  const scrolledClass = "glass border-black/[.08]";
 
-  if (scrolled) {
+  // Scrolled or mobile → single unified glass/transparent header
+  if (scrolled || !isDesktop) {
     return (
-      <header className={`${baseClass} ${scrolledClass}`}>
+      <header className={`${baseClass} ${scrolled ? "glass border-black/[.08]" : "bg-transparent border-transparent"}`}>
         <NavInner variant="dark" menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       </header>
     );
   }
 
-  // Hero state: two clipped headers — left (dark) + right (light)
+  // Desktop hero: two clipped headers — left (dark) + right (light)
   return (
     <>
-      {/* Left half — white panel, dark text */}
       <header
         className={`${baseClass} bg-transparent border-transparent`}
         style={{ clipPath: "inset(0 50% 0 0)" }}
@@ -144,8 +153,6 @@ export default function Nav() {
       >
         <NavInner variant="dark" menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       </header>
-
-      {/* Right half — blue panel, white text */}
       <header
         className={`${baseClass} bg-transparent border-transparent`}
         style={{ clipPath: "inset(0 0 0 50%)" }}
