@@ -78,9 +78,9 @@ export default function Pricing() {
         </div>
 
         {/* Pricing cards */}
-        <div className="flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pt-5 pb-4 -mx-5 px-5 lg:-mx-0 lg:px-0 lg:overflow-visible lg:grid lg:grid-cols-3 lg:items-stretch">
+        <div className="pricing-scroll flex flex-col gap-5 pt-5 pb-4 md:flex-row md:overflow-x-auto md:snap-x md:snap-mandatory md:scroll-smooth md:-mx-5 md:px-5 lg:mx-0 lg:px-0 lg:overflow-visible lg:grid lg:grid-cols-3 lg:items-stretch">
           {PLANS.map((plan, i) => (
-            <ScrollReveal key={plan.name} delay={i * 100} className="min-w-[280px] shrink-0 snap-center lg:min-w-0 lg:shrink lg:h-full">
+            <ScrollReveal key={plan.name} delay={i * 100} className="md:min-w-[280px] md:shrink-0 md:snap-center lg:min-w-0 lg:shrink lg:h-full">
               <div
                 className={`relative rounded-[var(--radius-card-lg)] p-6 md:p-8 h-full flex flex-col transition-all duration-300 ${
                   plan.featured
