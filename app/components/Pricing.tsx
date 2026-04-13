@@ -5,7 +5,6 @@ interface Plan {
   name: string;
   description: string;
   features: string[];
-  cta: string;
   featured?: boolean;
 }
 
@@ -20,7 +19,6 @@ const PLANS: Plan[] = [
       "Written summary & action items",
       "Follow-up by email",
     ],
-    cta: "Book a session",
   },
   {
     name: "Project",
@@ -34,7 +32,6 @@ const PLANS: Plan[] = [
       "Deployment on Vercel or Play Store",
       "2 weeks of post-launch support",
     ],
-    cta: "Discuss your project",
     featured: true,
   },
   {
@@ -48,7 +45,6 @@ const PLANS: Plan[] = [
       "Feature dev & bug fixes",
       "Flexible scope adjustments",
     ],
-    cta: "Let's talk",
   },
 ];
 
@@ -72,17 +68,17 @@ export default function Pricing() {
           <ScrollReveal delay={160}>
             <p className="text-[17px] text-muted leading-relaxed mt-4">
               Whether you need a quick second opinion or a long-term technical partner —
-              there's a format that fits.
+              there&apos;s a format that fits.
             </p>
           </ScrollReveal>
         </div>
 
         {/* Pricing cards */}
-        <div className="pricing-scroll flex flex-col gap-5 pt-5 pb-4 md:flex-row md:overflow-x-auto md:snap-x md:snap-mandatory md:scroll-smooth md:-mx-5 md:px-5 lg:mx-0 lg:px-0 lg:overflow-visible lg:grid lg:grid-cols-3 lg:items-stretch">
+        <div className="flex flex-col gap-4 md:gap-5 lg:grid lg:grid-cols-3 lg:items-stretch">
           {PLANS.map((plan, i) => (
-            <ScrollReveal key={plan.name} delay={i * 100} className="md:min-w-[280px] md:shrink-0 md:snap-center lg:min-w-0 lg:shrink lg:h-full">
+            <ScrollReveal key={plan.name} delay={i * 100} className="lg:h-full">
               <div
-                className={`relative rounded-[var(--radius-card-lg)] p-6 md:p-8 h-full flex flex-col transition-all duration-300 ${
+                className={`relative rounded-[var(--radius-card-lg)] p-5 md:p-6 h-full flex flex-col transition-all duration-300 ${
                   plan.featured
                     ? "bg-accent text-white shadow-[var(--shadow-xl)]"
                     : "bg-white shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1"
@@ -97,21 +93,21 @@ export default function Pricing() {
                 )}
 
                 {/* Plan name */}
-                <p className={`text-[13px] font-medium tracking-wider uppercase mb-4 ${plan.featured ? "text-white/70" : "text-muted"}`}>
+                <p className={`text-[13px] font-medium tracking-wider uppercase mb-2 ${plan.featured ? "text-white/70" : "text-muted"}`}>
                   {plan.name}
                 </p>
 
                 {/* Description */}
-                <p className={`text-[14px] leading-relaxed mb-8 ${plan.featured ? "text-white/80" : "text-muted"}`}>
+                <p className={`text-[14px] leading-relaxed mb-4 ${plan.featured ? "text-white/80" : "text-muted"}`}>
                   {plan.description}
                 </p>
 
                 {/* Features */}
-                <ul className="flex flex-col gap-3 flex-1 mb-8" role="list">
+                <ul className="flex flex-col gap-2" role="list">
                   {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-3 text-[14px]">
+                    <li key={f} className="flex items-start gap-2.5 text-[13px]">
                       <Check
-                        size={15}
+                        size={14}
                         className={`shrink-0 mt-0.5 ${plan.featured ? "text-white" : "text-accent"}`}
                         aria-hidden="true"
                       />
@@ -121,32 +117,24 @@ export default function Pricing() {
                     </li>
                   ))}
                 </ul>
-
-                {/* CTA */}
-                <a
-                  href="#contact"
-                  className={`inline-flex items-center justify-center w-full py-3.5 rounded-full text-[15px] font-normal transition-all duration-200 hover:scale-[1.01] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
-                    plan.featured
-                      ? "bg-white text-accent hover:bg-white/90 focus-visible:ring-white"
-                      : "bg-foreground text-white hover:bg-foreground/90 focus-visible:ring-foreground"
-                  }`}
-                >
-                  {plan.cta}
-                </a>
               </div>
             </ScrollReveal>
           ))}
         </div>
 
-        {/* Fine print */}
+        {/* Single CTA */}
         <ScrollReveal delay={300}>
-          <p className="text-center text-[13px] text-muted mt-10">
-            All rates are negotiable — happy to discuss a custom arrangement.{" "}
-            <a href="#contact" className="text-accent hover:underline">
-              Get in touch
+          <div className="flex flex-col items-center mt-12">
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center px-10 py-4 rounded-full text-[15px] font-medium bg-foreground text-white transition-all duration-200 hover:bg-foreground/90 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-foreground"
+            >
+              Let&apos;s discuss
             </a>
-            .
-          </p>
+            <p className="text-[13px] text-muted mt-4">
+              All rates are negotiable — happy to tailor a custom arrangement.
+            </p>
+          </div>
         </ScrollReveal>
 
       </div>
